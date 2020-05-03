@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Diplom</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+            <div>
+                @*<img src="~/img/Stock/logo.png" alt="logotip" class="logo" />
+                <img src="~/img/Stock/mm.png" alt="logotip" class="logo1" />*@
+                <div class="btn-log-reg">
+                    <ul>
+                        @if (Model != null && Model.Autorize == true && Model.Privilege1 == false)
+                        {
+                            <li><a href="/Order/OrderCreate" class="menu_link">User</a></li>
+                            <li><a href="/History/History" class="menu_link">Pa2</a></li>
+                        }
+                        else if (Model != null && Model.Autorize == true && Model.Privilege1 == true)
+                        {
+                            <li><a href="/Travel/Wait" class="menu_link">Boss</a></li>
+                        }
+                        @if (Model == null || Model.Autorize == false)
+                        {
+                            <li><a href="/RegAuto/Choose" class="menu_link authorize_btn">Регистрация</a></li>
+                            <li><a href="/RegAuto/Auto" class="menu_link authorize_btn">Вход</a></li>
+
+                        }
+                        else
+                        {
+                            <li>
+                                <p class="menu_link1">@Model.AccFamilyName @Model.AccFirstName @Model.AccPatronymic</p>
+                            </li>
+                            <li><a href="/RegAuto/LogOut" class="menu_link authorize_btn">Выйти</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            @*<div class="block-content">
+                <nav>
+                    <a class="active" href="/Home/Index">Главная страница</a>
+                    <a href="/Personal/PizzaPage">Пицца</a>
+                    <a href="/Home/PizzaCraft">Конструктор пиццы</a>
+                </nav>
+            </div>*@
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Diplom - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
